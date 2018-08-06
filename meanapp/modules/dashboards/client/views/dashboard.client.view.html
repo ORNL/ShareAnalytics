@@ -1,0 +1,65 @@
+<div class="container-fluid">  
+
+        <h2 style="text-align: center;">{{vm.dashboard.title}}</h2>
+        <markdown style="text-align: center;" ng-model="vm.dashboard.description"></markdown>            
+                
+        <div class="card" style="display:block;margin-left:auto;margin-right:auto;">
+                        <div class="card-body">
+                                <div class="row">
+                                        <div style="text-align:center;">
+                                        <a class="btn btn-primary" data-ui-sref="dashboards.edit({dashboardId: vm.dashboard._id})">
+                                                <i class="glyphicon glyphicon-edit"></i>
+                                        </a>
+                                        <a class="btn btn-danger" style="margin-left:10px;" ng-click="vm.remove()">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                        </a>
+                                        </div>  
+                                </div>
+                                <h4 style="display:inline-block;margin-left: 50%;transform: translateX(-50%);border-style:dashed;" ng-style="{'border-color': vm.calculateColor(vm.currentScore)}">Current Score: {{vm.dashboard.currentScore}}</h4>
+                                <div style="text-align: center;"><sparkline ng-model="vm.dashboard.scorehistory"></sparkline></div>                            
+                                <div style="text-align: center;">Location Name: {{vm.dashboard.locname}}</div>      
+                                <div style="text-align: center;">Location Type: {{vm.dashboard.loctype.title}}</div>                                      
+                        </div>
+        </div>
+                
+            <div class="row equal dashimg">
+                    
+                    <div class="col-xs-6 backgroundimage" ng-style="{'background-image':'url(data:image/png;base64,'+vm.dashboardimage+')'}"></div>
+                    <div class="col-xs-6" ng-if="!vm.dashboard.usealternatemapimage">
+                        <olmap ng-model="vm.oldata"></olmap>
+                    </div>
+                    <div class="col-xs-6 backgroundimage" ng-if="vm.dashboard.usealternatemapimage" ng-style="{'background-image':'url(data:image/png;base64,'+vm.mapimage+')'}"></div>                    
+            </div>
+            <table class="dashtable">
+                <caption style="color: black;">Score Related Results</caption>   
+                <tr>
+                        <th>Title</th>
+                        <th>Score</th>
+                        <th>Score History</th>                        
+                        <th></th>                        
+                </tr>
+                <tbody ui-sortable="vm.sortableOptions" ng-model="vm.results">
+                        <tr ng-repeat="result in vm.results" style="cursor:pointer;">
+                                <td>{{result.title}}</td>
+                                <td>{{result.score}}</td> 
+                                <td><sparkline ng-model="result.scores"></sparkline></td>                                                     
+                                <td ng-style="{'background-color': vm.calculateColor(result.score)}"></td>                       
+                        </tr>
+                </tbody>
+            </table>
+            <table class="dashtable" ng-if="vm.nonscoreresults.length > 0">
+                <caption style="color: black;">Non-score Related Results</caption>                           
+                <tr>
+                        <th>Title</th>
+                        <th>Score</th>
+                        <th>Score History</th>
+                </tr>
+                <tbody ui-sortable="vm.sortableOptions" ng-model="vm.nonscoreresults">
+                        <tr ng-repeat="result in vm.nonscoreresults" style="cursor:pointer;">
+                                <td>{{result.title}}</td>
+                                <td>{{result.score}}</td>   
+                                <td><sparkline ng-model="result.scores"></sparkline></td>                     
+                        </tr>
+                </tbody>
+        </table>
+</div>

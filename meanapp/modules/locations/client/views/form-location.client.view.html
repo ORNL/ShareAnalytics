@@ -1,0 +1,57 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.location._id ? 'Edit Location' : 'New Location Type'}}
+        <a ng-show="vm.location._id" class="btn btn-danger pull-right" ng-click="vm.remove()">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.locationForm" class="form-horizontal" ng-submit="vm.save(vm.form.locationForm.$valid,vm.form.locationForm)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="title">Title</label>
+          <input name="title" type="text" ng-model="vm.location.title" id="title" class="form-control" placeholder="Title" required autofocus>
+        </div>
+        <div class="form-group" show-errors>
+            <label class="control-label" for="description">Description</label>
+            <input name="description" type="text" ng-model="vm.location.description" id="description" class="form-control" placeholder="Description" required autofocus>
+        </div>
+        <h4 style="text-align:center">
+        Select Analytics Used to Score this Location Type
+        </h4>
+        <table class="dashtable">
+            <tbody ui-sortable ng-model="vm.location.analytics">
+                    <tr style="cursor:pointer;">
+                      <td><select style="height: 30px;width:100%;" ng-model="vm.selectedAnalytic" ng-options="x.title for x in vm.analytics" style="font-size: 14px;color:black;width:100%;"></select></td>
+                      <td><input style="width:100%;height: 30px;" ng-model="vm.percentScore" type="number" ng-keyup="vm.percentScore = vm.minmax(vm.percentScore,0, 100)"></input></td>      
+                      <td><button ng-click = "vm.addanalytic()" style="width:100%;" type="button" class="btn btn-primary">Add</button></td>
+                    </tr>
+            </tbody>
+          </table>
+        <table class="dashtable">
+          <tr>
+                  <th>Analytic</th>
+                  <th>Percent Total Score</th>
+                  <th>Action</th>
+          </tr>
+          <tbody ui-sortable ng-model="vm.location.analytics">
+                  <tr ng-repeat="analytic in vm.location.analytics" style="cursor:pointer;">
+                    <td><select style="height: 30px;width:100%;" ng-model="analytic.mod" ng-options="x.title for x in vm.analytics" style="font-size: 14px;color:black;width:100%;"></select></td>                      
+                    <td><input style="width:100%;height: 30px;" ng-model="analytic.percent" type="number" ng-keyup="vm.minmaxwithid(analytic.id,analytic.percent,0, 100)"></input></td>                            
+                    <td><button ng-click = "vm.deleteanalytic(analytic)" style="width:100%;" class="btn btn-danger">Delete</button></td>
+                  </tr>
+                  <tr ng-if="vm.location.analytics.length > 0">
+                      <td style="background-color: white;"></td>                      
+                      <td style="font-size: 25px;background-color: white;">Total: {{vm.totalPercentage}}</td>                            
+                      <td style="background-color: white;"></td>
+                    </tr>
+          </tbody>
+        </table>
+        <div class="form-group" style="margin-top:20px;">
+          <button type="submit" class="btn btn-default">{{vm.location._id ? 'Update' : 'Create'}}</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

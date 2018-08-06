@@ -1,0 +1,63 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.dashboard._id ? 'Edit Dashboard' : 'New Dashboard'}}
+        <a ng-show="vm.dashboard._id" class="btn btn-danger pull-right" ng-click="vm.remove()">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.dashboardForm" class="form-horizontal" ng-submit="vm.save(vm.form.dashboardForm.$valid,vm.form.dashboardForm)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="title">Title</label>
+          <input name="title" type="text" ng-model="vm.dashboard.title" id="title" class="form-control" placeholder="Title" required autofocus>
+        </div>
+        <div class="form-group" show-errors>
+            <label class="control-label" for="description">Description</label>
+            <input name="description" type="text" ng-model="vm.dashboard.description" id="description" class="form-control" placeholder="Description" required autofocus>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="locname">Location Name</label>
+          <input name="locname" type="text" ng-model="vm.dashboard.locname" id="locname" class="form-control" placeholder="Location Name" required autofocus>
+        </div>
+        <div class="form-group">  
+          <label class="control-label" for="description">Location Type</label>              
+          <select class="form-control" ng-model="vm.selectedLocType" ng-options="x.title for x in vm.locations" style="font-size: 14px;color:black;width:100%;" class="required" required></select>  
+          </br>      
+          <a data-ui-sref="locations.create">Add New Location Type</a> 
+        </div>            
+        <div class="form-group" show-errors>
+            <label class="control-label" for="latitude">Latitude</label>
+            <input name="latitude" type="number" ng-model="vm.latitude" id="latitude" class="form-control" placeholder="Latitude" required>
+        </div>
+        <div class="form-group" show-errors>
+            <label class="control-label" for="longitude">Longitude</label>
+            <input name="longitude" type="number" ng-model="vm.longitude" id="longitude" class="form-control" placeholder="Longitude" required>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="dashboardImageURL">Dashboard Image</label>
+            <input name="dashboardImageURL" type="text" ng-model="vm.dashboard.dashboardImageURL" id="dashboardImageURL" class="form-control" placeholder="Path to Dashboard Image" readonly="readonly"> 
+            </br>
+            <a ngf-max-size="500MB" ngf-pattern="'.jpg,.png,.bmp,.tif'" ngf-select="validateFile($file)" style="font-size: 16px;cursor: pointer;">
+              Select Image</a>          
+        </div>
+        <div class="form-group" show-errors>
+            <label class="control-label" for="usealternatemapimage">Use Alternate Map Image Instead of Interactive Map</label>
+            <input name="usealternatemapimage" type="checkbox" ng-model="vm.dashboard.usealternatemapimage" id="usealternatemapimage" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="mapImageURL">Alternate Map Image</label>
+            <input name="mapImageURL" type="text" ng-model="vm.dashboard.mapImageURL" id="mapImageURL" class="form-control" placeholder="Path to Alternate Map Image" readonly="readonly"> 
+            </br>
+            <a ngf-max-size="500MB" ngf-pattern="'.jpg,.png,.bmp,.tif'" ngf-select="validateMapFile($file)" style="font-size: 16px;cursor: pointer;">
+              Select Image</a>          
+        </div>
+        <uib-progressbar max="max" ng-show="f.progress > 0" value="f.progress"><span style="color:white; white-space:nowrap;">{{f.progress}}</span></uib-progressbar>                  
+        <div class="form-group" style="margin-top:20px;">
+          <button type="submit" class="btn btn-default">{{vm.dashboard._id ? 'Update' : 'Create'}}</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

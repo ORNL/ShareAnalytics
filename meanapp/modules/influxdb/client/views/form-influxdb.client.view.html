@@ -1,0 +1,47 @@
+<section>
+  <div class="page-header">
+    <h1>Create Dataset from InfluxDB Data
+    </h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.influxdbForm" class="form-horizontal" ng-submit="prepareInfluxData(vm.database,vm.collection,vm.filename)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="database">Database</label>
+          <input name="database" type="text" ng-model="vm.database" id="database" class="form-control" placeholder="Database Name" required autofocus>
+        </div>
+        <div class="form-group" show-errors>
+            <label class="control-label" for="collection">Collection</label>
+            <input name="collection" type="text" ng-model="vm.collection" id="collection" class="form-control" placeholder="Collection Name" required autofocus>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="filename">File Name</label>
+          <input name="filename" type="text" ng-model="vm.filename" id="filename" class="form-control" placeholder="File Name" required autofocus>
+        </div>
+        <div class="form-group"> 
+            <label class="control-label" for="collection">Start Time</label>            
+            <div uib-timepicker ng-model="starttime" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div> 
+            <div class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="startdate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </div>
+        </div>
+        <div class="form-group"> 
+            <label class="control-label" for="collection">End Time</label>            
+            <div uib-timepicker ng-model="endtime" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div> 
+            <div class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="enddate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </div>
+        </div>
+        <div class="form-group" style="margin-top:20px;">
+          <button type="submit" class="btn btn-default">Create</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

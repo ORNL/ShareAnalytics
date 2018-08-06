@@ -1,0 +1,25 @@
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">{{title}} Images</h4>
+        </div>
+        <div class="modal-body">
+            <div style="max-height: 100%;">
+                <div uib-carousel active="active" interval="myInterval">
+                    <div uib-slide ng-repeat="slide in images track by slide.id" index="slide.id">
+                        <img data-ng-src="data:image/png;base64,{{slide.image}}" style="margin:auto;max-width: 100%;height: auto;"></img>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>

@@ -1,0 +1,45 @@
+<section>
+  <div class="page-header">
+    <h1>
+      Dashboards
+      <a class="btn btn-primary pull-right" data-ui-sref="dashboards.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </h1>
+    <input type="text" class="form-control" enterpress="textSearch(searchbox)" ng-model="searchbox" placeholder="Search..">
+    <button style="margin-top:10px;" ng-click="textSearch(searchbox)" class="btn btn-primary">Search</button>
+  </div>
+  <table ng-table="vm.dashboardTableParams" class="table" show-filter="true">
+      <tr ng-repeat-start="set in $data" ng-click="vm.rowclicked(set)">
+              <td title="'Dashboard'" filter="{ title: 'text'}" sortable="'title'">
+                  {{set.title}}</td>
+              <td title="'Description'" filter="{ description: 'text'}" sortable="'description'">
+                  {{set.description}}</td>
+              <td title="'Location Type'" filter="{ locationtype: 'text'}" sortable="'locationtype'">
+              {{set.locationtype}}</td>
+              <td title="'User'" filter="{ displayName: 'text'}" sortable="'displayName'">
+                        {{set.displayName}}</td>
+              <td><a data-ui-sref="dashboards.view({dashboardId: set._id})" ng-if="set.isCurrentUserOwner || vm.authentication.user.roles.indexOf('admin')!=-1">View</a></td>        
+              <td><a data-ui-sref="dashboards.edit({dashboardId: set._id})" ng-if="set.isCurrentUserOwner || vm.authentication.user.roles.indexOf('admin')!=-1">Edit</a></td>
+              <td><a ng-click="remove(set); $event.stopPropagation();" style="cursor:pointer;" ng-if="set.isCurrentUserOwner || vm.authentication.user.roles.indexOf('admin')!=-1">Delete</a></td>               
+              <td>
+                  <button ng-if="set.expanded">-</button>
+                  <button ng-if="!set.expanded">+</button>
+              </td>
+              <tr ng-if="set.expanded" ng-repeat-end="">
+                  <td colspan="6">
+                      <small class="list-group-item-text">
+                          Created on
+                          <span data-ng-bind="set.created | date:'mediumDate'"></span>
+                          by
+                          <span ng-if="set.user" ng-bind="set.user.displayName"></span>
+                          <span ng-if="!set.user">Deleted User</span>
+                      </small>
+                  </td>
+              </tr>
+      </tr>
+  </table>
+  <div class="alert alert-warning text-center" data-ng-if="vm.dashboards.$resolved && !vm.dashboards.length">
+    No dashboards yet, why don't you <a data-ui-sref="dashboards.create">create one</a>?
+  </div>
+</section>

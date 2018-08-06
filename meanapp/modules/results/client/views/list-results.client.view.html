@@ -1,0 +1,48 @@
+<section>
+  <div class="page-header">
+    <h1>
+      Results
+    </h1>
+  </div>
+  <table ng-table="vm.resultTableParams" class="table" show-filter="true">
+      <tr ng-repeat-start="result in $data">
+              <td title="'Result'" filter="{ title: 'text'}" sortable="'title'">
+                  {{result.title}}</td>
+              <td title="'Description'" filter="{ description: 'text'}" sortable="'description'">
+                  {{result.description}}</td>
+              <td title="'User'" filter="{ userdisplayname: 'text'}" sortable="'userdisplayname'">
+                        {{result.userdisplayname}}</td>
+              <td title="'Analytic'" filter="{ analytictitle: 'text'}" sortable="'analytictitle'">
+                      {{result.analytictitle}}</td>
+              <td title="'Dataset'" filter="{ datasettitle: 'text'}" sortable="'datasettitle'">
+               {{result.datasettitle}}</td>
+               <td title="'Dashboard'" filter="{ dashboardtitle: 'text'}" sortable="'dashboardtitle'">
+                    {{result.dashboardtitle}}</td>
+                <td title="'Score'" filter="{ score: 'number'}" sortable="'score'">
+                            {{result.score}}</td>
+               <td><a ng-click="download(result); $event.stopPropagation();" style="cursor: pointer;">Download</a></td> 
+               <td><a ng-click="showModal(result); $event.stopPropagation();" style="cursor: pointer;">View Images</a></td>                
+               <td><a ng-click="remove(result); $event.stopPropagation();" style="cursor:pointer;" ng-show="result.isCurrentUserOwner || vm.authentication.user.roles.indexOf('admin')!=-1">Delete</a></td>                
+              <td>
+                  <button ng-if="result.expanded" ng-click="result.expanded = false">-</button>
+                  <button ng-if="!result.expanded" ng-click="result.expanded = true">+</button>
+              </td>
+              <tr ng-if="result.expanded" ng-repeat-end="">
+                  <td colspan="6">
+                      <small class="list-group-item-text">
+                          Started on
+                          <span data-ng-bind="result.start | date:'mediumDate'"></span>
+                          by
+                          <span ng-if="result.user" ng-bind="result.user.displayName"></span>
+                          <span ng-if="!result.user">Deleted User</span>
+                          Finished on
+                          <span data-ng-bind="result.finish | date:'mediumDate'"></span>
+                      </small>
+                  </td>
+              </tr>
+      </tr>
+  </table>
+  <div class="alert alert-warning text-center" data-ng-if="vm.theresults.$resolved && !vm.theresults.length">
+    No results yet, why don't you <a data-ui-sref="analyze">Analyze Some Data</a>?
+  </div>
+</section>

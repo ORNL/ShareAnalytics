@@ -1,0 +1,11 @@
+[Unit]
+Description=Creates folders needed by services that might not persist after install due to tmpfs mounts in Docker containers
+Before=slurmctld.service
+ConditionPathExists=!/var/spool/slurm
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/install -d -o slurm -g slurm -m 755 /var/spool/slurm
+
+[Install]
+WantedBy=multi-user.target

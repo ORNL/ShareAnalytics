@@ -1,0 +1,14 @@
+[Unit]
+Description=Script to push results back to server
+After=syslog.target
+
+[Service]
+Type=simple
+Restart=always
+SyslogIdentifier=pushresults
+ExecStart=/usr/bin/env python /usr/local/bin/pushresults.py
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target

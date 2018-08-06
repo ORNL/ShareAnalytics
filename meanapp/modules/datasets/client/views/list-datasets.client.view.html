@@ -1,0 +1,66 @@
+<section>
+  <div class="page-header">
+    <h1>
+      Datasets
+      <a class="btn btn-primary pull-right" data-ui-sref="datasets.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </h1>
+    <input type="text" class="form-control" enterpress="textSearch(searchbox)" ng-model="searchbox" placeholder="Search..">
+    <button style="margin-top:10px;" ng-click="textSearch(searchbox)" class="btn btn-primary">Search</button>
+  </div>
+  <table ng-table="vm.datasetTableParams" class="table" show-filter="true">
+      <tr ng-repeat-start="set in $data" ng-click="vm.rowclicked(set)">
+              <td title="'Dataset'" filter="{ title: 'text'}" sortable="'title'">
+                  {{set.title}}</td>
+              <td title="'Description'" filter="{ description: 'text'}" sortable="'description'">
+                  {{set.description}}</td>
+              <td title="'User'" filter="{ displayName: 'text'}" sortable="'displayName'">
+                        {{set.displayName}}</td>
+              <td><a data-ui-sref="datasets.edit({datasetId: set._id})" ng-if="set.isCurrentUserOwner || vm.authentication.user.roles.indexOf('admin')!=-1">Edit</a></td>
+              <td><a ng-if="set.allowDownload || set.isCurrentUserOwner || vm.authentication.user.roles.indexOf('admin')!=-1" ng-click="download(set); $event.stopPropagation();" style="cursor: pointer;">Download</a></td>               
+              <td><a ng-click="remove(set); $event.stopPropagation();" style="cursor:pointer;" ng-if="set.isCurrentUserOwner || vm.authentication.user.roles.indexOf('admin')!=-1">Delete</a></td>               
+              <td>
+                  <button ng-if="set.expanded">-</button>
+                  <button ng-if="!set.expanded">+</button>
+              </td>
+              <tr ng-if="set.expanded" ng-repeat-end="">
+                <td colspan="6">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#desc">Details</a></li>
+                        <li><a data-toggle="tab" href="#sample">Code Example</a></li>
+                        <li><a data-toggle="tab" href="#format">Data Format</a></li>
+                    </ul>
+                    
+                    <div class="tab-content">
+                    <div id="desc" class="tab-pane fade in active">
+                        <p style="margin-top: 20px;">
+                            Created: <span data-ng-bind="set.created | date:'mediumDate'"></span>
+                        </p>
+                        <p>
+                            Author: <span ng-if="set.user" ng-bind="set.user.displayName"></span><span ng-if="!set.user">Deleted User</span>
+
+                        </p>
+                        <p>Description: {{set.description}}</p>
+                        <p>Size: {{set.size}} {{set.sizeunits}}</p>
+                        <p>Number Rows: {{set.numrows}}</p>
+                        <p>License: {{set.license}}</p>
+                        <p>Extensible: {{set.extensible}}</p>
+                        <p>Date Collected: {{vm.convertdatetimetodate(set.collected)}}</p>
+                        <p>Valid Thru Date: {{vm.convertdatetimetodate(set.validthru)}}</p>
+                    </div>
+                    <div id="sample" class="tab-pane fade">
+                        <markdown ng-model="set.samplecode"></markdown>
+                    </div>
+                    <div id="format" class="tab-pane fade">
+                        <markdown ng-model="set.dataformat"></markdown>
+                    </div>
+                    </div>
+                </td>
+              </tr>
+      </tr>
+  </table>
+  <div class="alert alert-warning text-center" data-ng-if="vm.datasets.$resolved && !vm.datasets.length">
+    No datasets yet, why don't you <a data-ui-sref="datasets.create">create one</a>?
+  </div>
+</section>

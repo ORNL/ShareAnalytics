@@ -1,0 +1,262 @@
+html, body {
+  height: 100%; 
+}
+
+body {
+  display: flex; /*Create our flex container*/
+  flex-direction: column; /*Place flex items in container vertically*/
+}
+
+.content {
+  flex: 1 0 auto; /*Defines flex-grow flex-shrink and flex-basis - we want content div to grow to fill the space*/  
+}
+
+.headerthing {
+  height: 60px;
+  position: fixed;
+}
+
+li.borderless { border: 0 none; }
+
+.newback {
+  background-color: white;
+}
+
+.content-inside {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 60px;
+}
+
+.footer {
+  flex-shrink: 0; /*This dude does not shrink - stays the same size*/
+  height: 40px; 
+  padding-top: 10px; /*Center the text vertically*/
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid #c2cfd6;
+  background-color: #F8F8F8;
+  position: relative;
+}
+
+.backgroundimage {
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size: 100% 100%;
+}
+
+.centerinarow {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.centeranimage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.breadcrumb-foo {
+  margin-bottom: 5px;
+  margin-top: 5px; 
+  height: 40px;
+  border-bottom: 1px solid #c2cfd6;
+}
+
+.undecorated-link:hover {
+  text-decoration: none;
+}
+[ng\:cloak],
+[ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+.header-profile-image {
+  border-radius: 50%;
+  height: 28px;
+  margin-right: 5px;
+  opacity: 0.8;
+  width: 28px;
+}
+.open .header-profile-image,
+a:hover .header-profile-image {
+  opacity: 1;
+}
+.user-header-dropdown-toggle {
+  padding-bottom: 11px !important;
+  padding-top: 11px !important;
+}
+.user-primary-account {
+  font-size: 30px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.error-text {
+  display: none;
+}
+.has-error .help-block.error-text {
+  display: block;
+}
+.has-error .help-inline.error-text {
+  display: inline;
+}
+
+/* Header styling */
+
+
+/* Sidebar styling */
+#wrapper {
+  padding-top: 60px;
+  height: 100%;
+  transition: all 0.4s ease 0s;
+}
+
+table.dashtableresult {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px; 
+}
+
+.dashtableresult th {
+  border: 1px solid #dddddd;
+  color: white;
+  background-color: #A9A9A9;  
+  text-align: left;
+  padding: 8px;
+}
+
+table.dashtable {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.dashtable th {
+  border: 1px solid #dddddd;
+  background-color: #778899;  
+  color: white;
+  text-align: left;
+  padding: 8px;
+}
+
+/*For the sparkline tooltip had to do this - bootstrap interfering with it*/
+.jqstooltip {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 50px;
+}
+
+.dashtable td {
+  border: none;
+  text-align: left;
+  padding: 8px;
+}
+
+.dashtable tr:nth-child(even) {
+  background-color: #D3D3D3;
+}
+
+#sidebar-wrapper {
+  margin-left: -200px;
+  top: 65px;
+  left: 200px;
+  color: #E8E8E8;
+  width: 200px;
+  background: #303030;
+  position: fixed;
+  min-height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: all 0.4s ease 0s;
+}
+
+#wrapper.active {
+  padding-left: 0;
+}
+
+#wrapper.active #sidebar-wrapper {
+  left: 0;
+}
+
+#page-content-wrapper {
+  width: 100%;
+  padding-top: 70px;
+  padding-bottom: 40px;
+  transition: all 0.4s ease 0s;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 200px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-link {
+  color:white;
+  background-color:#303030;
+}
+
+.accheader {
+  font-size: 16px;
+}
+
+#menu-toggle {
+    text-decoration: none;
+    float: left;
+    color: #fff;
+    padding-right: 15px;
+}
+
+@media (max-width:767px) {
+
+#wrapper {
+  padding-left: 0;
+}
+
+#sidebar-wrapper {
+  left: 0;
+}
+
+#wrapper.active {
+  position: absolute;
+  left: 200px;
+}
+
+#wrapper.active #sidebar-wrapper {
+  left: 200px;
+  width: 200px;
+  transition: all 0.1s ease 0s;
+}
+
+#menu-toggle {
+  display: inline-block;
+}
+
+}
+/* Sidebar styling */
+
+/*Dashboard Styling*/
+.equal {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+}
+
+.dashimg {
+  padding-left: 10px; 
+  min-height: 300px;
+}
+/**/
+
+
+

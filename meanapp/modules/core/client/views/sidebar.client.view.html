@@ -1,0 +1,75 @@
+<div ng-controller="SideBarController as vm">
+
+    <ul class="nav navbar-nav navbar-right" ng-hide="vm.authentication.user">
+        <li ui-sref-active="active" class="navbar-brand">
+          <a ui-sref="authentication.signup" style="color:white;background-color:#303030;margin-left: 30px;">Sign Up</a>
+        </li>
+        <li class="divider-vertical"></li>
+        <li ui-sref-active="active" class="navbar-brand">
+          <a ui-sref="authentication.signin" style="color:white;background-color:#303030;margin-left: 30px;">Sign In</a>
+        </li>
+      </ul>
+
+    <uib-accordion close-others="oneAtATime" ng-hide="!vm.authentication.user">
+        <div uib-accordion-group style="background-color: #303030;" is-open="status.dashboardopen">
+          <uib-accordion-heading>
+            <div class="accheader">
+            <i class="fa fa-area-chart" aria-hidden="true"></i>
+            Dashboards <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.dashboardopen, 'glyphicon-chevron-right': !status.dashboardopen}"></i>
+            </div>
+          </uib-accordion-heading>
+          <ul class="list-group" style="margin-bottom:0px;">
+            <li class="list-group-item borderless" style="background-color: #303030;"><a ui-sref="dashboards.list" style="font-size: 14px;color:white;">Search</a></li>
+            <li class="list-group-item borderless" style="background-color: #303030;"><a ui-sref="dashboards.create" style="font-size: 14px;color:white;">Add Dashboard</a></li>
+          </ul>
+        </div>
+        <div uib-accordion-group style="background-color: #303030;" is-open="status.locationsopen">
+            <uib-accordion-heading>
+              <div class="accheader">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+                Location Types <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.locationsopen, 'glyphicon-chevron-right': !status.locationsopen}"></i>
+              </div>
+            </uib-accordion-heading>
+            <ul class="list-group" style="margin-bottom:0px;">
+              <li class="list-group-item borderless" style="background-color: #303030;"><a ui-sref="locations.list" style="font-size: 14px;color:white;">Search</a></li>
+              <li class="list-group-item borderless" style="background-color: #303030;"><a ui-sref="locations.create" style="font-size: 14px;color:white;">Add Location</a></li>
+            </ul>
+        </div>
+        <div uib-accordion-group style="background-color: #303030;" is-open="status.datasetopen">
+            <uib-accordion-heading>
+              <div class="accheader">
+              <i class="fa fa-database" aria-hidden="true"></i>
+              Datasets <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.datasetopen, 'glyphicon-chevron-right': !status.datasetopen}"></i>
+              </div>
+            </uib-accordion-heading>
+            <ul class="list-group" style="margin-bottom:0px;">
+              <li class="list-group-item borderless" style="background-color: #303030;"><a ui-sref="datasets.list" style="font-size: 14px;color:white;">Search</a></li>
+              <li class="list-group-item borderless" style="background-color: #303030;"><a ui-sref="datasets.create" style="font-size: 14px;color:white;">Add Dataset</a></li>
+            </ul>
+        </div>
+        <div uib-accordion-group style="background-color: #303030;" is-open="status.analyticsopen">
+            <uib-accordion-heading>
+              <div class="accheader">
+              <i class="fa fa-line-chart" aria-hidden="true"></i>
+              Analytics <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.analytics, 'glyphicon-chevron-right': !status.analyticsopen}"></i>
+              </div>
+            </uib-accordion-heading>
+            <ul class="list-group" style="margin-bottom:0px;">
+              <li class="list-group-item borderless" style="background-color: #303030;"><a ui-sref="analytics.list" style="font-size: 14px;color:white;">Search</a></li>
+              <li class="list-group-item borderless" style="background-color: #303030;"><a ui-sref="analytics.create" style="font-size: 14px;color:white;">Add Analytic</a></li>
+            </ul>
+        </div>
+        <div uib-accordion-group style="background-color: #303030;" is-open="status.analyzeopen">
+          <uib-accordion-heading>
+            <div class="accheader">
+            <i class="fa fa-cogs" aria-hidden="true"></i>
+            Analyze <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.analyze, 'glyphicon-chevron-right': !status.analyzeopen}"></i>
+            </div>
+          </uib-accordion-heading>
+          <ul class="list-group" style="margin-bottom:0px;">
+            <li class="list-group-item borderless" style="background-color: #303030;"><a ui-sref="analyze" style="font-size: 14px;color:white;">Analyze</a></li>
+            <li class="list-group-item borderless" style="background-color: #303030;"><a ui-sref="results.list" style="font-size: 14px;color:white;">View Results</a></li>
+          </ul>              
+        </div>  
+      </uib-accordion>
+</div>

@@ -1,0 +1,62 @@
+<section>
+  <div class="page-header">
+    <h1>
+      Analytics
+      <a class="btn btn-primary pull-right" data-ui-sref="analytics.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </h1>
+    <input type="text" class="form-control" enterpress="textSearch(searchbox)" ng-model="searchbox" placeholder="Search..">
+    <button style="margin-top:10px;" ng-click="textSearch(searchbox)" class="btn btn-primary">Search</button>
+  </div>
+  <table ng-table="vm.analyticTableParams" ng-table-columns-binding="vm.tableColumns" class="table" show-filter="true">
+      <tr ng-repeat-start="analytic in $data" ng-click="vm.rowclicked(analytic)">
+            <td title="'Analytic'" filter="{ title: 'text'}" sortable="'title'">
+                {{analytic.title}}</td>
+            <td title="'User'" filter="{ displayName: 'text'}" sortable="'displayName'">
+                    {{analytic.displayName}}</td>
+            <td><a data-ui-sref="analytics.edit({analyticId: analytic._id})" ng-if="analytic.isCurrentUserOwner || vm.authentication.user.roles.indexOf('admin')!=-1">Edit</a></td>
+            <td><a ng-if="analytic.allowDownload || analytic.isCurrentUserOwner || vm.authentication.user.roles.indexOf('admin')!=-1" ng-click="download(analytic); $event.stopPropagation();" style="cursor: pointer;">Download</a></td>                             
+            <td><a ng-click="remove(analytic); $event.stopPropagation();" style="cursor:pointer;" ng-if="analytic.isCurrentUserOwner || vm.authentication.user.roles.indexOf('admin')!=-1">Delete</a></td> 
+            <td>
+                <button ng-if="analytic.expanded">-</button>
+                <button ng-if="!analytic.expanded">+</button>
+            </td>
+            <tr ng-if="analytic.expanded" ng-repeat-end="">
+                <td colspan="6">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#desc">Details</a></li>
+                        <li><a data-toggle="tab" href="#sample">Code Example</a></li>
+                        <li><a data-toggle="tab" href="#inputformat">Input Format</a></li>
+                        <li><a data-toggle="tab" href="#format">Result Format</a></li>
+                    </ul>
+                    
+                    <div class="tab-content">
+                    <div id="desc" class="tab-pane fade in active">
+                        <p style="margin-top: 20px;">
+                            Created: <span data-ng-bind="analytic.created | date:'mediumDate'"></span>
+                        </p>
+                        <p>
+                            Author: <span ng-if="analytic.user" ng-bind="analytic.user.displayName"></span><span ng-if="!analytic.user">Deleted User</span>
+
+                        </p>
+                        <p>Description: {{analytic.description}}</p>
+                    </div>
+                    <div id="sample" class="tab-pane fade">
+                        <markdown ng-model="analytic.samplecode"></markdown>
+                    </div>
+                    <div id="inputformat" class="tab-pane fade">
+                        <markdown ng-model="analytic.inputformat"></markdown>
+                    </div>
+                    <div id="format" class="tab-pane fade">
+                        <markdown ng-model="analytic.resultformat"></markdown>
+                    </div>
+                    </div>
+                </td>
+              </tr>
+      </tr>
+  </table>
+  <div class="alert alert-warning text-center" data-ng-if="vm.analytics.$resolved && !vm.analytics.length">
+    No analytics yet, why don't you <a data-ui-sref="analytics.create">create one</a>?
+  </div>
+</section>

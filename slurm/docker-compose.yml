@@ -1,0 +1,74 @@
+version: '2'
+services:
+  head:
+    image: mcrslurm/head
+    hostname: head
+    networks:
+    - slurm
+    - slurmlocal
+    privileged: true
+    volumes:
+      - /tmp/newresults:/tmp/newresults
+      - /tmp/results:/tmp/results
+      - /tmp/analytics:/tmp/analytics
+      - /tmp/datasets:/tmp/datasets
+      - /tmp/slurm_share:/mnt/share
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  worker1:
+    image: mcrslurm/compute
+    hostname: worker1
+    networks:
+    - slurmlocal
+    privileged: true
+    volumes:
+      - /tmp/newresults:/tmp/newresults
+      - /tmp/results:/tmp/results
+      - /tmp/analytics:/tmp/analytics
+      - /tmp/datasets:/tmp/datasets
+      - /tmp/slurm_share:/mnt/share
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  worker2:
+    image: mcrslurm/compute
+    hostname: worker2
+    networks:
+    - slurmlocal
+    privileged: true
+    volumes:
+      - /tmp/newresults:/tmp/newresults
+      - /tmp/results:/tmp/results
+      - /tmp/analytics:/tmp/analytics
+      - /tmp/datasets:/tmp/datasets
+      - /tmp/slurm_share:/mnt/share
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  worker3:
+    image: mcrslurm/compute
+    hostname: worker3
+    networks:
+    - slurmlocal
+    privileged: true
+    volumes:
+      - /tmp/newresults:/tmp/newresults
+      - /tmp/results:/tmp/results
+      - /tmp/analytics:/tmp/analytics
+      - /tmp/datasets:/tmp/datasets
+      - /tmp/slurm_share:/mnt/share
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  worker4:
+    image: mcrslurm/compute
+    hostname: worker4
+    networks:
+    - slurmlocal
+    privileged: true
+    volumes:
+      - /tmp/newresults:/tmp/newresults
+      - /tmp/results:/tmp/results
+      - /tmp/analytics:/tmp/analytics
+      - /tmp/datasets:/tmp/datasets
+      - /tmp/slurm_share:/mnt/share
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+networks:
+  slurm:
+    driver: bridge
+  slurmlocal:
+    driver: bridge

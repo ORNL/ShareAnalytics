@@ -1,0 +1,11 @@
+[Unit]
+Description=Creates folders needed by services that might not persist after install due to tmpfs mounts in Docker containers
+Before=munge.service
+ConditionPathExists=!/var/log/munge
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/install -d -o munge -g munge -m 0700 /var/log/munge
+
+[Install]
+WantedBy=multi-user.target

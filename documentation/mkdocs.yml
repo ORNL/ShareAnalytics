@@ -1,0 +1,9 @@
+site_name: ShareAL Docs
+pages:
+    - About: index.md
+    - Getting Started: gettingstarted.md
+    - User Guide: userguide.md
+    - Project Overview: projectoverview.md
+    - WebApp: webapp.md
+    - HPC Cluster: cluster.md
+    - Dashboard: dash.md

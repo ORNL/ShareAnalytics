@@ -1,0 +1,85 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.dataset._id ? 'Edit Dataset' : 'New Dataset'}}
+        <a ng-show="vm.dataset._id" class="btn btn-danger pull-right" ng-click="vm.remove()">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.datasetForm" class="form-horizontal" ng-submit="vm.save(vm.form.datasetForm.$valid,vm.form.datasetForm)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="title">Title</label>
+          <input name="title" type="text" ng-model="vm.dataset.title" id="title" class="form-control" placeholder="Title" required autofocus>
+        </div>
+        <div class="form-group" show-errors>
+            <label class="control-label" for="description">Description</label>
+            <input name="description" type="text" ng-model="vm.dataset.description" id="description" class="form-control" placeholder="Description" required autofocus>
+        </div>
+        <div class="form-group">            
+          <label class="control-label" for="license">License</label>              
+          <select class="form-control" ng-model="vm.dataset.license" ng-options="x for x in vm.licenses" style="font-size: 14px;color:black;width:100%;" required></select>
+        </div>
+        <div class="form-group">            
+          <label class="control-label" for="extensible">Extensible</label>              
+          <select class="form-control" ng-model="vm.dataset.extensible" ng-options="x for x in vm.extensibleoptions" style="font-size: 14px;color:black;width:100%;" required></select>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="size">Dataset Size</label>
+          <input name="size" type="number" ng-model="vm.dataset.size" id="title" class="form-control" placeholder="File Size">
+          <select class="form-control" ng-model="vm.dataset.sizeunits" ng-options="x for x in vm.filesizeunits" placeholder="Units" style="font-size: 14px;color:black;width:100%;margin-top: 10px;" required></select>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="numrows">Number Rows</label>
+          <input name="numrows" type="number" ng-model="vm.dataset.numrows" id="numrows" class="form-control" placeholder="Number Rows">
+        </div>
+        <div class="form-group">            
+          <label class="control-label" for="collected">Date Collected</label>  
+          <input type="date" ng-model="vm.dataset.collected" placeholder="yyyy-MM-dd" min="1970-01-01" required />         
+        </div>
+        <div class="form-group">            
+          <label class="control-label" for="validthru">Valid Thru Date</label>  
+          <input type="date" ng-model="vm.dataset.validthru" placeholder="yyyy-MM-dd" min="1970-01-01" required />         
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="allowDownload">Allow Download</label>
+            <select ng-model="vm.dataset.allowDownload" class="form-control"
+            ng-options="o.v as o.n for o in [{ n: 'No', v: false }, { n: 'Yes', v: true }]">
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="samplecode">Sample Code (markdown enabled - to add code block see <a href="https://help.github.com/articles/creating-and-highlighting-code-blocks/">Fenced Code Blocks</a>)</label>
+            <textarea ng-model="vm.dataset.samplecode" class="form-control" placeholder="```Code goes here```"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="dataformat">Result Format Example (markdown enabled)</label>
+          <textarea ng-model="vm.dataset.dataformat" class="form-control" placeholder="```{key: value}```"></textarea>
+        </div>
+        <div class="form-group">
+            <table class="dashtable">
+              <caption style="color: black;">Files Already Added</caption>   
+              <tr>
+                      <th>File Name</th>                      
+                      <th></th>                        
+              </tr>
+              <tbody ng-model="vm">
+                      <tr ng-repeat="filename in vm.datasetfiles" style="cursor:pointer;">
+                              <td>{{filename}}</td>
+                              <td><a ng-click="remove(filename);">Delete</a></td>                        
+                      </tr>
+              </tbody>
+          </table>
+            </br>
+            <button class="btn btn-default" ngf-max-size="500MB" ng-disabled="vm.disablefileselect" ngf-multiple="true" ngf-select="validateFiles($files)">Select Files</button>
+             or <a ui-sref="influxdb.createdataset">Download InfluxDB Data</a><br />     
+              <span class="help-block">Maximum file size is 500 MB - for larger datasets please contact a webpage administrator</span> 
+        </div>
+        <uib-progressbar max="max" ng-show="f.progress > 0" value="f.progress"><span style="color:white; white-space:nowrap;">{{f.progress}}</span></uib-progressbar>                  
+        <div class="form-group" style="margin-top:20px;">
+          <button type="submit" class="btn btn-default">{{vm.dataset._id ? 'Update' : 'Create'}}</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

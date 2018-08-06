@@ -1,0 +1,39 @@
+<section>
+    <div class="page-header">
+      <h1>Analyze</h1>
+    </div>
+    <div class="col-md-12">
+      <form name="vm.form.analyzeForm" class="form-horizontal" novalidate>
+        <fieldset>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="title">Title</label>
+            <input name="title" type="text" ng-model="title" id="title" class="form-control" placeholder="Title" required autofocus>
+          </div>
+          <div class="form-group" show-errors>
+              <label class="control-label" for="description">Description</label>
+              <input name="description" type="text" ng-model="description" id="description" class="form-control" placeholder="Description" required autofocus>
+          </div>
+          <div class="form-group">  
+            <label class="control-label" for="description">Select Dataset</label>              
+            <select class="form-control" ng-model="selectedDataset" ng-options="x.title for x in vm.datasets" ng-change="updateFiles()" style="font-size: 14px;color:black;width:100%;" class="required" required></select>       
+          </div> 
+          <div class="form-group">  
+            <label class="control-label" for="description">Select File</label>       
+            <span class="help-block">Must Select Dataset First</span>        
+            <select class="form-control" ng-model="selectedFile" ng-options="x for x in vm.datasetfiles" style="font-size: 14px;color:black;width:100%;" class="required" required></select>       
+          </div> 
+          <div class="form-group">            
+            <label class="control-label" for="description">Select Analytic</label>              
+            <select class="form-control" ng-model="selectedAnalytic" ng-options="x.title for x in vm.analytics" style="font-size: 14px;color:black;width:100%;" required></select>
+          </div>
+          <div class="form-group">            
+              <label class="control-label" for="description">Select Location</label>              
+              <select class="form-control" ng-model="selectedDashboard" ng-options="x.title for x in vm.dashboards" style="font-size: 14px;color:black;width:100%;"></select>
+          </div>
+          <div class="form-group" style="margin-top:20px;">
+            <button ng-click="sendToSlurm(title,description,selectedDataset,selectedFile,selectedAnalytic,selectedDashboard,vm.form.analyzeForm.$valid)" class="btn btn-default">Analyze</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </section>

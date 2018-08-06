@@ -1,0 +1,63 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.analytic._id ? 'Edit Analytic' : 'New Analytic'}}
+        <a ng-show="vm.analytic._id" class="btn btn-danger pull-right" ng-click="vm.remove()">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.analyticForm" class="form-horizontal" ng-submit="vm.save(vm.form.analyticForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="title">Title</label>
+          <input name="title" type="text" ng-model="vm.analytic.title" id="title" class="form-control" placeholder="Title" required autofocus>
+        </div>
+        <div class="form-group" show-errors>
+            <label class="control-label" for="description">Description</label>
+            <textarea name="description" ng-model="vm.analytic.description" id="description" style="resize: none;" class="form-control" placeholder="Description" required autofocus></textarea>
+        </div>
+        <div class="form-group">            
+          <label class="control-label" for="type">Analytic Type</label>              
+          <select class="form-control" ng-model="vm.analytic.type" ng-options="x for x in vm.analytictypes" style="font-size: 14px;color:black;width:100%;" required></select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="allowDownload">Allow Download</label>
+            <select ng-model="vm.analytic.allowDownload" class="form-control"
+            ng-options="o.v as o.n for o in [{ n: 'No', v: false }, { n: 'Yes', v: true }]">
+            </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="samplecode">Sample Code (markdown enabled - to add code block see <a href="https://help.github.com/articles/creating-and-highlighting-code-blocks/">Fenced Code Blocks</a>)</label>
+          <textarea ng-model="vm.analytic.samplecode" class="form-control" placeholder="```Code goes here```"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="inputformat">Input Format Example (markdown enabled)</label>
+        <textarea ng-model="vm.analytic.inputformat" class="form-control" placeholder="```{key: value}```"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="resultformat">Result Format Example (markdown enabled)</label>
+        <textarea ng-model="vm.analytic.resultformat" class="form-control" placeholder="```{key: value}```"></textarea>
+      </div>
+        <div class="form-group">
+            <label class="control-label" for="name">Analytic File</label>
+            <input name="name" type="text" ng-model="vm.analytic.name" id="name" class="form-control" placeholder="Path to Analytic File" readonly="readonly" required autofocus> 
+            </br>
+            <a ngf-max-size="500MB" ngf-select="validateFile($file)" style="font-size: 16px;cursor: pointer;">
+              Select File</a>           
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="supportingfiles">Supporting Files</label>
+          <input name="supportingfiles" type="text" ng-model="vm.analytic.supportingfiles" id="supportingfiles" class="form-control" placeholder="Supporting Files" readonly="readonly" autofocus> 
+          </br>
+          <a ngf-max-size="500MB" ngf-multiple="true" ngf-select="validateSupportingFiles($files)" style="font-size: 16px;cursor: pointer;">
+            Select Supporting Files</a>           
+        </div>
+        <uib-progressbar max="max" ng-show="f.progress > 0" value="f.progress"><span style="color:white; white-space:nowrap;">{{f.progress}}</span></uib-progressbar>          
+        <div class="form-group" style="margin-top:20px;">
+          <button type="submit" class="btn btn-default">{{vm.analytic._id ? 'Update' : 'Create'}}</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

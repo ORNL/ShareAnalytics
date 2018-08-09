@@ -216,11 +216,11 @@ exports.dashboardByID = function (req, res, next, id) {
 
         //Pick the most recent of each analytic for the purpose of reporting on the dashboard
         for(var i = 0; i < docs.length; i++) {
-            if(!(docs[i].analytic in mostrecentdocs)) {
-              mostrecentdocs[docs[i].analytic] = docs[i];
-              mostrecentdocs[docs[i].analytic].scores = [docs[i].score];
+            if(!((docs[i].analytic.title + docs[i].analytic.description) in mostrecentdocs)) {
+              mostrecentdocs[(docs[i].analytic.title + docs[i].analytic.description)] = docs[i];
+              mostrecentdocs[(docs[i].analytic.title + docs[i].analytic.description)].scores = [docs[i].score];
             } else {
-              mostrecentdocs[docs[i].analytic].scores.push(docs[i].score);              
+              mostrecentdocs[(docs[i].analytic.title + docs[i].analytic.description)].scores.push(docs[i].score);              
             }
         }
 

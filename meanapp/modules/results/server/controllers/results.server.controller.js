@@ -56,7 +56,7 @@ var updateScore = function(dashboardid, results) {
                   }
                 }
               }
-
+              
               docs[0].currentScore = score;
               //add to list of historical scores
               docs[0].scorehistory.push(score);

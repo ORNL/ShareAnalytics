@@ -74,6 +74,7 @@
 
         $state.go("results.list");
         toaster.pop('success',"Success","Job submitted successfully!");    
+
         $http({
             url: 'http://localhost:3000/api/slurm',
             method: "POST",
@@ -83,7 +84,8 @@
           .then(function(response) {
           }, 
           function(response) { // optional
-          });
+        });
+
         return true;
       };
     }

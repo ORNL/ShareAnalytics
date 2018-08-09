@@ -135,7 +135,7 @@
       }
 
       function errorCallback(res) {
-        toaster.pop('error',"Error","Analytic save error!");
+        toaster.pop('error',"Error","Analytic save error!  All fields must be filled in.");
       }
     }
   }

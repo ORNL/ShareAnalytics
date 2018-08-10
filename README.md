@@ -38,7 +38,9 @@ The figure below shows a diagram of how the various components of ShareAL are in
 
 The web application, shown below, is the main interface for ShareAL users and utilizes the MEANJS framework. In addition to normal website functionality such as user management, it gives the user access to dashboards, data sets, analytics and the ability to perform analyses on the HPC cluster. The dashboard is geared towards facility characterization and allows the user to create a metric composed of multiple analytics for a particular site to provide a cumulative score. Data sets and analytics can be shared amongst users to allow collaboration or access to the data can be restricted. Once analytics and data sets have been uploaded to the website, an analysis can then be run on the HPC cluster and the results applied to a particular dashboard's facility characterization score or viewed on the results page. 
 
-![Web Application](images/webapp.png "Web Application")
+Below is a fictitious dashboard example for a site under surveillance. It provides both the historical and current scores of each analytic that contributes to the total score as well as for the total score itself, in this case the score being related to potential illegal activity. Each of the analytics is related to energy usage of a particular category of devices and the total score is a combination of those individual metrics. 
+
+![Fictitious Dashboard Page](images/webapp.png "Fictitious Dashboard Page")
 
 #### Streaming Dashboard
 
